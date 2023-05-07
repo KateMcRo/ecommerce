@@ -3,8 +3,8 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
+// Find all route
 router.get('/', async (req, res) => {
-  // find all categories
   try {
     const category = await Category.findAll(
       {include: [Product]}
@@ -14,27 +14,47 @@ router.get('/', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: `Internal server errror`});
   }
-  // be sure to include its associated Products
 });
 
+// Find specific category
 router.get('/:id', async (req, res) => {
-  // UH OH DIDNT DO IT
   const category = await Category.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    include: [{
+      model: Product
+    }]
   })
   res.json(category)
-  // find one category by its `id` value
-  // be sure to include its associated Products
 });
 
-router.post('/', (req, res) => {
-  // create a new category
+// create a new category
+router.post('/', async (req, res) => {
+  try {
+    const data = req.body;
+    const result = await Category.create(data);
+    res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
+  try {
+    const category = await Category.findByPk(req.params.id);
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found'});
+    }
+    category.category_name = req.body.category_name;
+    await category.save();
+    res.status(200).json(category);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update category' });
+  }
 });
 
 router.delete('/:id', (req, res) => {
