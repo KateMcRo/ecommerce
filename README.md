@@ -10,6 +10,14 @@ This is the back end for an e-commerce site. I was given a working Express.js AP
 - Writing the routes was repetative and helped commit the try/catch statements to memory.
 - With this project I discovered the difference between a status code 200 and 201 (OK vs Created)
 
+## Installation
+1. Clone repo to your machine.
+2. Ensure dependencies are installed and use environment variables to store sensitive data, like your MySQL username, password, and database name.
+3. Create your database by typing `mysql -u your_username -p` into the command line and entering your password when prompted. 
+4. Then type `USE ecommerce_db;` followed by `source db/schema.sql`
+5. Seed the database using `node seeds/index.js`
+6. Start the server using `node server.js`
+
 ## Usage
 
 The routes can be tested with Insomnia. Here is a screenshot of what the Category data looks like from a GET request:
