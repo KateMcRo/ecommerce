@@ -18,6 +18,8 @@ This is the back end for an e-commerce site. I was given a working Express.js AP
 5. Seed the database using `node seeds/index.js`
 6. Start the server using `node server.js`
 
+[Video Demo of steps 3-6](https://drive.google.com/file/d/1DnQQm0cxpAnkR9T3GYDgjWtIGL4Eolg9/view)
+
 ## Usage
 
 The routes can be tested with Insomnia. Here is a screenshot of what the Category data looks like from a GET request:
